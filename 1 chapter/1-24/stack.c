@@ -5,7 +5,7 @@
 
 /*	接口函数定义	*/
 
-int Initialize_S (Stack * const pstack, const int capacity)
+int Initialize_S (Stack * const pstack, const int capacity) // const here to prevent from being altered inside the function
 {
 	if (capacity <= 0)
 		return 0 ;
@@ -34,21 +34,19 @@ int IsFull_S (const Stack * const pstack)
 	return (*pstack) -> top + 2 > (*pstack) -> capacity - 1 ;
 }
 
-int Push_S (const Stack * const pstack, const Stack_Item st1, const Stack_Item st2)
+int Push_S (const Stack * const pstack, const Stack_Item st1)
 {
 	if (IsFull_S (pstack))
 		return 0 ;
 	(*pstack) -> array[++(*pstack) -> top] = st1 ;
-	(*pstack) -> array[++(*pstack) -> top] = st2 ;
 
 	return 1 ;
 }
 
-int Pop_S (const Stack * const pstack, Stack_Item * const pst1, Stack_Item * const pst2)
+int Pop_S (const Stack * const pstack, Stack_Item * const pst1)
 {
 	if (IsEmpty_S (pstack))
 		return 0 ;
-	*pst2 = (*pstack) -> array[(*pstack) -> top--] ;
 	*pst1 = (*pstack) -> array[(*pstack) -> top--] ;
 
 	return 1 ;

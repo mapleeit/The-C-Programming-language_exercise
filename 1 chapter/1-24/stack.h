@@ -4,7 +4,7 @@
 
 /*	数据类型定义	*/
 
-typedef int Stack_Item ;
+typedef char Stack_Item ;
 typedef struct stack
 {
 	Stack_Item * array ;
@@ -32,17 +32,17 @@ int IsEmpty_S (const Stack * const pstack) ;
 /*	时间复杂度:	O (1)	*/
 int IsFull_S (const Stack * const pstack) ;
 
-/*	操作:	向栈中添加两个元素	*/
-/*	操作前:	pstack 指向一个已初始化的栈, si1, si2 是待添加的数据	*/
-/*	操作后:	如果栈未满, 向栈中添加这两个数据, 返回 1; 否则返回 0	*/
+/*	操作:	向栈中添加一个元素	*/
+/*	操作前:	pstack 指向一个已初始化的栈, si1是待添加的数据	*/
+/*	操作后:	如果栈未满, 向栈中添加这一个数据, 返回 1; 否则返回 0	*/
 /*	时间复杂度:	O (1)	*/
-int Push_S (const Stack * const pstack, const Stack_Item st1, const Stack_Item st2) ;
+int Push_S (const Stack * const pstack, const Stack_Item st1) ;
 
-/*	操作:	从栈中弹出两个元素	*/
-/*	操作前:	pstack 指向一个已初始化的栈, pst1, pst2 是指向两个数据的指针	*/
-/*	操作后:	如果该栈不为空, 从栈顶弹出两个元素, 保持二者原有相对顺序, 返回 1; 否则返回 0	*/
+/*	操作:	从栈中弹出一个元素	*/
+/*	操作前:	pstack 指向一个已初始化的栈, pst1 是指向两个数据的指针	*/
+/*	操作后:	如果该栈不为空, 从栈顶弹出一个元素,返回 1; 否则返回 0	*/
 /*	时间复杂度:	O (1)	*/
-int Pop_S (const Stack * const pstack, Stack_Item * const pst1, Stack_Item * const pst2) ;
+int Pop_S (const Stack * const pstack, Stack_Item * const pst1) ;
 
 /*	操作:	释放一个栈所占用的内存空间	*/
 /*	操作前:	pstack 指向一个已初始化的栈	*/
