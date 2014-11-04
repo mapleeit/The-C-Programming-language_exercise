@@ -18,6 +18,10 @@ void ungetch(char);
 // get the this from the cache or the console
 char getch();
 // init the buffer space for getch() and ungetch()
+
+int compare(const Stack*, char c);
+
+
 char cache;
 // define the stack of quote
 Stack quoteStack;
@@ -25,6 +29,8 @@ Stack comStack;
 // main()
 int main(){
 	char c, n;
+	char *temp;
+	int result = 0;
 	// init the stack
 	Stack myStack;
 	Initialize_S(&myStack, parenthesesMax);
@@ -32,16 +38,27 @@ int main(){
 	// init the stack of quote and the stack of comment
 	Initialize_S(&quoteStack, quoteMax);
 	Initialize_S(&comStack, comMax);
-
+	temp = (char*)malloc(sizeof(char));
 	//printf("%c", getch());
 	while ((c = getch()) != '`'){
 		if (!isInQuote(c) && !isInCom(c)){
-			printf("%c", c);
+			switch (c){
+			case '('  : Push_S(&myStack, c);putchar(c);result = 1;break;
+			case '{' : Push_S(&myStack, c);putchar(c);result = 1;break;
+			case '[' : Push_S(&myStack, c);putchar(c);result = 1;break;
+			case ')' : result = compare(&myStack, c);break;
+			case '}' : result = compare(&myStack, c);break;
+			case ']' : result = compare(&myStack, c);break;
+			default : putchar(c); result = 1;
+			}
+			switch(result){
+			case 1 : result = 0;break;
+			case 0 : printf("\nsomthing wrong : '(){}[]'!");
+			}
 		}else{
-			printf(" ");
+			putchar(c);
 		}
 	}
-	
 	system("pause");
 }
 
@@ -102,4 +119,18 @@ char getch(){
 	result = cache ? cache : getchar();
 	cache = '\0';
 	return result;
+}
+
+int compare(const Stack* const pstack, const char c){
+	char temp;
+	if(IsEmpty_S(pstack)) return 0;
+	else{
+		Pop_S(pstack, &temp);
+		switch(c){
+		case ')' : if (temp == '(') {putchar(c);return 1;}break;
+		case ']' : if (temp == '[') {putchar(c);return 1;}break;
+		case '}' : if (temp == '{') {putchar(c);return 1;}break;
+		default : Push_S(pstack, temp); return 0;
+		}
+	}
 }
